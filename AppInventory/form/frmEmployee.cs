@@ -25,6 +25,7 @@ namespace AppInventory.form
         byte[] photo;
         SqlDataAdapter da;
         DataTable dt;
+        DialogResult re1;
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -46,6 +47,27 @@ namespace AppInventory.form
             dt = new DataTable();
             da.Fill(dt);
             dgvEmp.DataSource = dt;
+            dgvEmp.ColumnHeadersDefaultCellStyle.Font =
+                new Font("Time News Roman", 14, FontStyle.Bold);
+            dgvEmp.DefaultCellStyle.Font = new Font("Khmer Os System", 12);
+            dgvEmp.Columns["Name"].Width = 200;
+            dgvEmp.Columns["BirthDate"].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dgvEmp.Columns["Hired Date"].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dgvEmp.Columns["Salary"].DefaultCellStyle.Format = "c";
+
+            DataGridViewImageColumn img = new DataGridViewImageColumn();
+            img = (DataGridViewImageColumn)dgvEmp.Columns["Photo"];
+            img.ImageLayout = DataGridViewImageCellLayout.Stretch;
+
+            foreach(DataGridViewColumn col in dgvEmp.Columns)
+            {
+                col.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+                dgvEmp.ClearSelection(); // clear select item in datagridview
+
+                dt.Dispose(); //close datatable
+                dt.Dispose(); //close dataAdapter
+            }
         }
         private void frmEmployee_Load(object sender, EventArgs e)
         {
@@ -64,6 +86,8 @@ namespace AppInventory.form
                 myOpera.OnOff(this, true);
                 btnNew.Text = "Cancel";
                 btnNew.Image = AppInventory.Properties.Resources.cancel32;
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = false;
                 txtID.Focus();
             }
             else
@@ -256,6 +280,118 @@ namespace AppInventory.form
                 Modify("InsertEmployee");
                 MessageBox.Show("Your Data Was Saved...", "Save",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                Modify("UpdateEmployee");
+                MessageBox.Show("Your Data Was Update...", "Update",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            //frmEmployee_Load(sender, e);
+            myOpera.OnOff(this, false);
+            LoadData();
+            btnNew.Text = "New";
+            btnNew.Image = AppInventory.Properties.Resources.add32;
+        }
+
+        private void txtID_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(re1 == DialogResult.OK)
+            {
+                return;
+            }
+        }
+
+        private void dgvEmp_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int i;
+            if(dgvEmp.RowCount > 0)
+            {
+                i = e.RowIndex;
+                if (i < 0) return;
+                if (btnNew.Text == "Cancel" && btnSave.Enabled == true)
+                    return;
+                DataGridViewRow row = dgvEmp.Rows[i];
+                txtID.Text =row.Cells[0].Value.ToString();
+                txtName.Text = row.Cells[1].Value.ToString();
+                if (row.Cells[2].Value.ToString() == "ស")
+                {
+                    rdoF.Checked = true;
+                }
+                else
+                {
+                    rdoM.Checked = true;
+                    dtpDob.CustomFormat = "dd/MM/yyyy";
+                    dtpDob.Text = row.Cells[3].Value.ToString();
+                    txtPosition.Text = row.Cells[4].Value.ToString();
+                    txtSalary.Text = String.Format("{0:C}", row.Cells[5].Value.ToString());
+                    txtAddress.Text = row.Cells[6].Value.ToString();
+                    txtcontact.Text = row.Cells[7].Value.ToString();
+                    dtpHire.CustomFormat = "dd/MM/yyyy";
+                    dtpHire.Text = row.Cells[8].Value.ToString();
+
+                    photo = (byte[])row.Cells[9].Value;
+                    MemoryStream ms = new MemoryStream(photo);
+                    picEmp.Image = Image.FromStream(ms);
+
+                    btnEdit.Enabled = true;
+                    btnDelete.Enabled = true;
+                }
+                    
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            b = false;
+            btnNew.Text = "Cancel";
+            btnNew.Image = AppInventory.Properties.Resources.cancel32;
+            myOpera.OnOff(this, true);
+            btnEdit.Enabled = false;
+            btnDelete.Enabled = false;
+            txtID.Enabled = false;
+            txtName.Focus();
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult re;
+            re = MessageBox.Show("Do you want to delete ?", "Delete",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (re == DialogResult.Yes)
+            {
+                Modify("DeleteEmployee");
+                myOpera.ClearData(this);
+                frmEmployee_Load(sender, e);
+                MessageBox.Show("Your Data was Delete...", "Delete",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void txtSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            com = new SqlCommand("SEMPBYName", myOpera.con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@s", txtSearch.Text);
+
+            da = new SqlDataAdapter();
+            da.SelectCommand = com;
+            dt = new DataTable();
+            da.Fill(dt);
+            dgvEmp.DataSource = dt;
+
+            if(dt.Rows.Count < 1)
+            {
+                com = new SqlCommand("SEMPBYID", myOpera.con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("@s", txtSearch.Text);
+
+                da = new SqlDataAdapter();
+                da.SelectCommand = com;
+                dt = new DataTable();
+                da.Fill(dt);
+                dgvEmp.DataSource = dt;
             }
         }
     }

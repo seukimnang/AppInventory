@@ -47,3 +47,4 @@ C:\C#\AppInventory\AppInventory\bin\Debug\net6.0-windows\runtimes\unix\lib\netco
 C:\C#\AppInventory\AppInventory\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\C#\AppInventory\AppInventory\bin\Debug\net6.0-windows\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\C#\AppInventory\AppInventory\obj\Debug\net6.0-windows\AppInventory.csproj.CopyComplete
+C:\C#\AppInventory\AppInventory\obj\Debug\net6.0-windows\AppInventory.form.frmCategory.resources
