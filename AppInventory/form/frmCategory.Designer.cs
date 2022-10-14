@@ -93,7 +93,7 @@
             this.txtCateID.Name = "txtCateID";
             this.txtCateID.Size = new System.Drawing.Size(254, 49);
             this.txtCateID.TabIndex = 1;
-            this.txtCateID.Tag = "*";
+            this.txtCateID.Tag = "";
             // 
             // txtCateName
             // 
@@ -117,6 +117,7 @@
             this.btnNew.Text = "New";
             this.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // btnSave
             // 
@@ -130,6 +131,7 @@
             this.btnSave.Text = "Save";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnEdit
             // 
@@ -143,6 +145,7 @@
             this.btnEdit.Text = "Edit";
             this.btnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnClose
             // 
@@ -157,6 +160,7 @@
             this.btnClose.Text = "Close";
             this.btnClose.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // label5
             // 
@@ -176,21 +180,25 @@
             this.txtSearch.Size = new System.Drawing.Size(393, 49);
             this.txtSearch.TabIndex = 12;
             this.txtSearch.Tag = "*";
+            this.txtSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyUp);
             // 
             // lswCate
             // 
+            this.lswCate.FullRowSelect = true;
+            this.lswCate.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.lswCate.Location = new System.Drawing.Point(61, 259);
             this.lswCate.Name = "lswCate";
-            this.lswCate.Size = new System.Drawing.Size(393, 121);
+            this.lswCate.Size = new System.Drawing.Size(393, 188);
             this.lswCate.TabIndex = 13;
             this.lswCate.Tag = "*";
             this.lswCate.UseCompatibleStateImageBehavior = false;
+            this.lswCate.SelectedIndexChanged += new System.EventHandler(this.lswCate_SelectedIndexChanged);
             // 
             // frmCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 36F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(649, 404);
+            this.ClientSize = new System.Drawing.Size(649, 459);
             this.Controls.Add(this.lswCate);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.label5);
