@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Data;
 
 namespace AppInventory
 {
@@ -55,6 +56,20 @@ namespace AppInventory
                 else if (ct is PictureBox)
                     ((PictureBox)ct).Image = null;
             }
+        }
+        public static void FillCbo(ComboBox cbo, string fd1,string fd2, string tb)
+        {
+            SqlDataAdapter da;
+            DataTable dt;
+            da = new SqlDataAdapter("SELECT " + fd1 + "," + fd2 +" FROM " + tb, con);
+            dt = new DataTable();
+            da.Fill(dt);
+            cbo.DataSource = null;
+            cbo.Items.Clear();
+            cbo.DataSource = dt;
+            cbo.DisplayMember = fd2;
+            cbo.ValueMember = fd1;
+            cbo.Text = null;
         }
     }
 }

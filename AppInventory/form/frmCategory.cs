@@ -187,7 +187,12 @@ namespace AppInventory.form
             ListViewItem item;
             for(int i=0; i<dt.Rows.Count; i++)
             {
+                DataRow row = dt.Rows[i];
+                arr[0] = row[0].ToString();
+                arr[1] = row[1].ToString();
 
+                item = new ListViewItem(arr);
+                lswCate.Items.Add(item);
             }
         }
     }
