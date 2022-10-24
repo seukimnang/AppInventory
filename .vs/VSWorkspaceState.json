@@ -2,9 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\AppInventory",
-    "\\AppInventory\\class",
     "\\AppInventory\\form"
   ],
-  "SelectedNode": "\\AppInventory.sln",
+  "SelectedNode": "\\AppInventory\\form\\frmImport.cs",
   "PreviewInSolutionExplorer": false
 }

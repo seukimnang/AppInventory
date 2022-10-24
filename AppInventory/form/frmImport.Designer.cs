@@ -55,7 +55,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lswImp = new System.Windows.Forms.ListView();
             this.label12 = new System.Windows.Forms.Label();
             this.txtImpTotal = new System.Windows.Forms.TextBox();
             this.cboImpSupName = new System.Windows.Forms.ComboBox();
@@ -246,6 +246,7 @@
             this.txtImpProID.Name = "txtImpProID";
             this.txtImpProID.Size = new System.Drawing.Size(174, 44);
             this.txtImpProID.TabIndex = 18;
+            this.txtImpProID.TextChanged += new System.EventHandler(this.txtImpProID_TextChanged);
             // 
             // cboImpProName
             // 
@@ -255,6 +256,7 @@
             this.cboImpProName.Size = new System.Drawing.Size(205, 44);
             this.cboImpProName.TabIndex = 19;
             this.cboImpProName.SelectedIndexChanged += new System.EventHandler(this.cboImpProName_SelectedIndexChanged);
+            this.cboImpProName.SelectionChangeCommitted += new System.EventHandler(this.cboImpProName_SelectionChangeCommitted);
             // 
             // txtImpQty
             // 
@@ -283,6 +285,7 @@
             this.btnAdditem.Text = "Add Item";
             this.btnAdditem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAdditem.UseVisualStyleBackColor = true;
+            this.btnAdditem.Click += new System.EventHandler(this.btnAdditem_Click);
             // 
             // btnRemove
             // 
@@ -295,6 +298,7 @@
             this.btnRemove.Text = "Remove";
             this.btnRemove.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // label7
             // 
@@ -346,14 +350,15 @@
             this.label11.TabIndex = 28;
             this.label11.Text = "តម្លៃ";
             // 
-            // listView1
+            // lswImp
             // 
-            this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(15, 440);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(991, 269);
-            this.listView1.TabIndex = 29;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.lswImp.FullRowSelect = true;
+            this.lswImp.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lswImp.Location = new System.Drawing.Point(15, 440);
+            this.lswImp.Name = "lswImp";
+            this.lswImp.Size = new System.Drawing.Size(991, 269);
+            this.lswImp.TabIndex = 29;
+            this.lswImp.UseCompatibleStateImageBehavior = false;
             // 
             // label12
             // 
@@ -412,7 +417,7 @@
             this.Controls.Add(this.cboImpSupName);
             this.Controls.Add(this.txtImpTotal);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.lswImp);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
@@ -482,7 +487,7 @@
         private Label label9;
         private Label label10;
         private Label label11;
-        private ListView listView1;
+        private ListView lswImp;
         private Label label12;
         private TextBox txtImpTotal;
         private ComboBox cboImpSupName;
